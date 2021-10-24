@@ -62,6 +62,7 @@ func (s serverState) String() string {
 	return fmt.Sprintf("(unknown state: %d)", int(s))
 }
 
+// 业务程序实现
 // Server implements the protocol.Server interface.
 type Server struct {
 	client protocol.ClientCloser

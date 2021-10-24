@@ -72,6 +72,7 @@ func (s *Serve) remoteArgs(network, address string) []string {
 	return args
 }
 
+// [C] 直接关注 Run 过程
 // Run configures a server based on the flags, and then runs it.
 // It blocks until the server shuts down.
 func (s *Serve) Run(ctx context.Context, args ...string) error {
@@ -91,6 +92,8 @@ func (s *Serve) Run(ctx context.Context, args ...string) error {
 		di.MonitorMemory(ctx)
 		di.Serve(ctx, s.Debug)
 	}
+	// jsonrpc2 是通信层包装，略过
+	// 关注 lsprpc
 	var ss jsonrpc2.StreamServer
 	if s.app.Remote != "" {
 		var err error
@@ -110,6 +113,7 @@ func (s *Serve) Run(ctx context.Context, args ...string) error {
 		network = "tcp"
 		addr = fmt.Sprintf(":%v", s.Port)
 	}
+	// [C] 两个分支；盲猜区分本地还是远程；只和通信有关，可以先跳过
 	if addr != "" {
 		log.Printf("Gopls daemon: listening on %s network, address %s...", network, addr)
 		defer log.Printf("Gopls daemon: exiting")

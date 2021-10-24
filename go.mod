@@ -11,3 +11,5 @@ require (
 	golang.org/x/text v0.3.6
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 )
+
+require golang.org/dl v0.0.0-20211007222857-6589945b0d11 // indirect

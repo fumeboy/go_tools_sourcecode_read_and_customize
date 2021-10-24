@@ -51,6 +51,7 @@ func NewStreamServer(cache *cache.Cache, daemon bool) *StreamServer {
 	return &StreamServer{cache: cache, daemon: daemon}
 }
 
+// [C] 盲猜是多客户端登记
 func (s *StreamServer) Binder() *ServerBinder {
 	newServer := func(ctx context.Context, client protocol.ClientCloser) protocol.Server {
 		session := s.cache.NewSession(ctx)
